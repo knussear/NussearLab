@@ -34,72 +34,131 @@ def parse_bibtex(content):
     """Parse BibTeX content and return list of publication dicts"""
     publications = []
     
-    # Split into individual entries
-    entries = re.findall(r'@\w+\{[^@]+\}', content, re.DOTALL)
+    # Split into individual entries - handle nested braces
+    # Find all @type{...} blocks, accounting for nested braces
+    entries = []
+    i = 0
+    while i < len(content):
+        # Look for @ followed by entry type
+        match = re.search(r'@(\w+)\s*\{', content[i:])
+        if not match:
+            break
+        
+        start = i + match.start()
+        brace_start = i + match.end() - 1  # Position of opening brace
+        
+        # Find matching closing brace
+        brace_count = 1
+        j = brace_start + 1
+        while j < len(content) and brace_count > 0:
+            if content[j] == '{':
+                brace_count += 1
+            elif content[j] == '}':
+                brace_count -= 1
+            j += 1
+        
+        if brace_count == 0:
+            entries.append(content[start:j])
+            i = j
+        else:
+            # Malformed entry, skip
+            i = brace_start + 1
+    
+    def extract_field(entry, field_name):
+        """Extract a field value from a BibTeX entry, handling nested braces"""
+        # Match field = {value} or field = "value"
+        pattern = rf'{field_name}\s*=\s*([{{"])'
+        match = re.search(pattern, entry, re.IGNORECASE)
+        if not match:
+            return None
+        
+        delimiter = match.group(1)
+        start_pos = match.end() - 1
+        
+        if delimiter == '{':
+            # Handle nested braces
+            brace_count = 1
+            i = start_pos + 1
+            while i < len(entry) and brace_count > 0:
+                if entry[i] == '{':
+                    brace_count += 1
+                elif entry[i] == '}':
+                    brace_count -= 1
+                i += 1
+            if brace_count == 0:
+                return entry[start_pos + 1:i - 1].strip()
+        else:  # delimiter == '"'
+            # Find closing quote
+            end_pos = entry.find('"', start_pos + 1)
+            if end_pos != -1:
+                return entry[start_pos + 1:end_pos].strip()
+        
+        return None
     
     for entry in entries:
         pub = {}
         
         # Extract year
-        year_match = re.search(r'year\s*=\s*[{"\']?(\d{4})[}"\']?', entry, re.IGNORECASE)
-        if year_match:
-            pub['year'] = year_match.group(1)
+        year_str = extract_field(entry, 'year')
+        if year_str:
+            year_match = re.search(r'(\d{4})', year_str)
+            if year_match:
+                pub['year'] = year_match.group(1)
         
         # Extract title
-        title_match = re.search(r'title\s*=\s*[{"]([^}"]+)[}"]', entry, re.IGNORECASE)
-        if title_match:
+        title = extract_field(entry, 'title')
+        if title:
             # Clean up title - remove extra braces and LaTeX commands
-            title = title_match.group(1)
-            title = re.sub(r'[{}]', '', title)
-            title = re.sub(r'\\[a-zA-Z]+', '', title)
+            # Remove all braces (repeat to handle nested braces)
+            while '{' in title or '}' in title:
+                title = re.sub(r'\{([^{}]*)\}', r'\1', title)
+            title = re.sub(r'\\[a-zA-Z]+\s*', '', title)  # Remove LaTeX commands
             pub['title'] = title.strip()
         
         # Extract authors
-        author_match = re.search(r'author\s*=\s*[{"]([^}"]+)[}"]', entry, re.IGNORECASE)
-        if author_match:
-            authors = author_match.group(1)
+        authors = extract_field(entry, 'author')
+        if authors:
             # Clean up author format
-            authors = re.sub(r'\s+and\s+', ', ', authors)
-            authors = re.sub(r'[{}]', '', authors)
+            authors = re.sub(r'\s+and\s+', ', ', authors, flags=re.IGNORECASE)
+            authors = re.sub(r'\{([^}]+)\}', r'\1', authors)  # Remove braces
             pub['authors'] = authors.strip()
         
         # Extract journal/booktitle
-        journal_match = re.search(r'(?:journal|booktitle)\s*=\s*[{"]([^}"]+)[}"]', entry, re.IGNORECASE)
-        if journal_match:
-            journal = journal_match.group(1)
-            journal = re.sub(r'[{}]', '', journal)
+        journal = extract_field(entry, 'journal') or extract_field(entry, 'booktitle')
+        if journal:
+            journal = re.sub(r'\{([^}]+)\}', r'\1', journal)
             pub['journal'] = journal.strip()
         
         # Extract volume
-        volume_match = re.search(r'volume\s*=\s*[{"\']?(\d+)[}"\']?', entry, re.IGNORECASE)
+        volume = extract_field(entry, 'volume')
         
         # Extract number/issue
-        number_match = re.search(r'number\s*=\s*[{"\']?(\d+)[}"\']?', entry, re.IGNORECASE)
+        number = extract_field(entry, 'number')
         
         # Extract pages
-        pages_match = re.search(r'pages\s*=\s*[{"]([^}"]+)[}"]', entry, re.IGNORECASE)
+        pages = extract_field(entry, 'pages')
         
         # Combine journal info with volume/issue/pages
         if pub.get('journal'):
-            if volume_match:
-                pub['journal'] += f", {volume_match.group(1)}"
-                if number_match:
-                    pub['journal'] += f"({number_match.group(1)})"
-            if pages_match:
-                pub['journal'] += f", {pages_match.group(1)}"
+            if volume:
+                pub['journal'] += f", {volume}"
+                if number:
+                    pub['journal'] += f"({number})"
+            if pages:
+                pub['journal'] += f", {pages}"
         
         # Extract DOI
-        doi_match = re.search(r'doi\s*=\s*[{"]([^}"]+)[}"]', entry, re.IGNORECASE)
-        if doi_match:
-            doi = doi_match.group(1).strip()
+        doi = extract_field(entry, 'doi')
+        if doi:
+            doi = doi.strip()
             if not doi.startswith('http'):
                 doi = f"https://doi.org/{doi}"
             pub['doi'] = doi
         
         # Extract URL (for PDF)
-        url_match = re.search(r'url\s*=\s*[{"]([^}"]+)[}"]', entry, re.IGNORECASE)
-        if url_match:
-            pub['pdf_url'] = url_match.group(1).strip()
+        url = extract_field(entry, 'url')
+        if url:
+            pub['pdf_url'] = url.strip()
         
         # Only add if we have minimum required fields
         if pub.get('year') and pub.get('title'):
@@ -141,7 +200,7 @@ def main():
         print("Usage: python3 import_publications.py <file>")
         print("\nSupported formats:")
         print("  - CSV: publications.csv")
-        print("  - BibTeX: publications.bib")
+        print("  - BibTeX: publications.bib or publications.biblatex")
         print("\nCSV Format:")
         print("year,title,authors,journal,doi,pdf_url")
         print('2024,"Title","Author A., Nussear K.","Journal Name","https://doi.org/...","https://..."')
@@ -154,7 +213,7 @@ def main():
     
     try:
         # Detect file format
-        is_bibtex = input_file.lower().endswith('.bib')
+        is_bibtex = input_file.lower().endswith('.bib') or input_file.lower().endswith('.biblatex')
         
         with open(input_file, 'r', encoding='utf-8') as infile:
             content = infile.read()
