@@ -34,6 +34,8 @@ The website consists of five main pages:
 
 ### Adding Publications (publications.html)
 
+**Quick Method:**
+
 1. Open `publications.html`
 2. Add a new publication in the publications list section:
 
@@ -51,6 +53,10 @@ The website consists of five main pages:
 ```
 
 **Important:** Set the `data-year` attribute correctly for the year filter to work.
+
+**Bulk Import from ResearchGate or other sources:**
+
+See `IMPORT_PUBLICATIONS.md` for detailed instructions on importing multiple publications at once from ResearchGate, CSV files, or citation managers.
 
 ### Adding Projects (projects.html)
 

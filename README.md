@@ -37,10 +37,14 @@ The site can be hosted on any web server, Netlify, Vercel, or university hosting
 
 See `WEBSITE_GUIDE.md` for comprehensive instructions on:
 - Adding lab members
-- Adding publications
+- Adding publications (manual or bulk import)
 - Adding projects
 - Adding news items
 - Customizing colors and styles
+
+### Importing Publications
+
+For bulk importing publications from ResearchGate or other sources, see `IMPORT_PUBLICATIONS.md`
 
 ## File Structure
 
