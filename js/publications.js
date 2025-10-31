@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     pub.style.display = 'block';
                     visibleCount++;
                 } else if (selectedYear === 'older') {
-                    const year = parseInt(pubYear);
-                    if (year < 2021) {
+                    const year = parseInt(pubYear, 10);
+                    if (!isNaN(year) && year < 2021) {
                         pub.style.display = 'block';
                         visibleCount++;
                     } else {
