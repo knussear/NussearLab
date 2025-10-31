@@ -1,0 +1,452 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header styles */
+header {
+    background-color: #003366;
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    margin-bottom: 15px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #cce0ff;
+}
+
+/* Navigation styles */
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+nav li {
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+    background-color: #004d99;
+}
+
+/* Main content styles */
+main {
+    background-color: white;
+    padding: 40px 20px;
+    margin: 30px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Hero section */
+.hero {
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 40px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Page header */
+.page-header {
+    text-align: center;
+    padding: 20px 0 40px;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 40px;
+}
+
+.page-header h2 {
+    font-size: 2.5rem;
+    color: #003366;
+    margin-bottom: 15px;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Section styles */
+section {
+    margin-bottom: 40px;
+}
+
+section h3 {
+    font-size: 2rem;
+    color: #003366;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #003366;
+}
+
+section h4 {
+    font-size: 1.5rem;
+    color: #004d99;
+    margin-bottom: 10px;
+}
+
+/* Cards layout */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.card {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card h4 {
+    color: #003366;
+    margin-bottom: 15px;
+}
+
+/* People page styles */
+.people-section {
+    margin-bottom: 50px;
+}
+
+.person-list {
+    display: grid;
+    gap: 25px;
+}
+
+.person-card {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #003366;
+}
+
+.person-info h4 {
+    color: #003366;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.person-role {
+    color: #004d99;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.person-email {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.person-bio {
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Projects page styles */
+.projects-section {
+    margin-bottom: 50px;
+}
+
+.project-card {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 4px solid #003366;
+    margin-bottom: 25px;
+}
+
+.project-card h4 {
+    color: #003366;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.project-status {
+    color: #004d99;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.project-funding {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.project-description {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.project-team {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Publications page styles */
+.publications-section {
+    margin-bottom: 50px;
+}
+
+.publication-card {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #003366;
+    margin-bottom: 25px;
+}
+
+.publication-authors {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.publication-title {
+    color: #003366;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.publication-journal {
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.publication-abstract {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.publication-link {
+    color: #004d99;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.publication-link:hover {
+    color: #003366;
+    text-decoration: underline;
+}
+
+.publications-info {
+    background-color: #e8f4f8;
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.publications-info h3 {
+    border-bottom: none;
+    margin-bottom: 15px;
+}
+
+.publications-info ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.publications-info li {
+    margin-bottom: 10px;
+}
+
+.publications-info a {
+    color: #004d99;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.publications-info a:hover {
+    text-decoration: underline;
+}
+
+/* News page styles */
+.news-section {
+    display: grid;
+    gap: 30px;
+}
+
+.news-card {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #003366;
+}
+
+.news-date {
+    color: #004d99;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.news-card h3 {
+    color: #003366;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.news-card p {
+    color: #555;
+    line-height: 1.8;
+}
+
+/* About section */
+.about {
+    background-color: #e8f4f8;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.about h3 {
+    border-bottom: none;
+    margin-bottom: 15px;
+}
+
+.about p {
+    color: #555;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+/* Research areas */
+.research-areas {
+    margin-bottom: 50px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    nav a {
+        padding: 12px 15px;
+    }
+
+    .hero h2,
+    .page-header h2 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    section h3 {
+        font-size: 1.6rem;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    main {
+        padding: 30px 15px;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero h2,
+    .page-header h2 {
+        font-size: 1.6rem;
+    }
+
+    section h3 {
+        font-size: 1.4rem;
+    }
+}
