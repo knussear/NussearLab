@@ -3,6 +3,7 @@ publications_output.html
 
 # User's publication data files (optional - remove if you want to track them)
 publications.csv
+publications.bib
 
 # Python cache
 __pycache__/

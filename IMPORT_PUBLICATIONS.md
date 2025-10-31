@@ -32,13 +32,13 @@ ResearchGate doesn't provide a public API, so the easiest method is to manually 
 
 4. **Important**: Replace `YEAR` in `data-year="YEAR"` with the actual publication year for filtering to work
 
-## Method 2: Using the Import Helper Script
+## Method 2: Using the Import Helper Script (CSV or BibTeX)
 
-We've created a Python script to help you generate the HTML from a CSV file:
+We've created a Python script to help you generate the HTML from CSV or BibTeX files:
 
-### Step 1: Create a CSV file
+### Option A: From CSV File
 
-Create a file named `publications.csv` with your publication data:
+**Step 1:** Create a file named `publications.csv` with your publication data:
 
 ```csv
 year,title,authors,journal,doi,pdf_url
@@ -46,34 +46,72 @@ year,title,authors,journal,doi,pdf_url
 2023,Another Research Paper,"Author A., Nussear K., Researcher C.",Conservation Biology 15(3):200-215,https://doi.org/10.yyyy/yyyyy,https://example.com/paper.pdf
 ```
 
-### Step 2: Run the import script
+**Step 2:** Run the import script:
 
 ```bash
 python3 import_publications.py publications.csv
 ```
 
-This will generate `publications_output.html` with all your publications formatted correctly.
+### Option B: From BibTeX File
 
-### Step 3: Copy the output
+**Step 1:** Export your publications from your citation manager (Zotero, Mendeley, EndNote) as BibTeX format, or download BibTeX from ResearchGate:
+
+```bibtex
+@article{nussear2024sample,
+  title={Sample Publication Title},
+  author={Nussear, Kenneth and Author, A. and Collaborator, B.},
+  journal={Journal Name},
+  volume={10},
+  number={2},
+  pages={123--145},
+  year={2024},
+  doi={10.xxxx/xxxxx}
+}
+```
+
+**Step 2:** Run the import script:
+
+```bash
+python3 import_publications.py publications.bib
+```
+
+### Step 3: Copy the output (for both options)
 
 1. Open `publications_output.html`
 2. Copy the generated publication divs
 3. Paste them into `publications.html` in the `publications-container` section
 
-## Method 3: Export from Citation Manager
+## Method 3: Direct Export from Citation Managers
 
-If you use a citation manager (Zotero, Mendeley, EndNote):
+If you use citation managers like Zotero, Mendeley, or EndNote:
 
-1. **Export your publications** to BibTeX format
-2. **Use an online converter** or the provided Python script to convert BibTeX to HTML
-3. **Paste the formatted HTML** into `publications.html`
+1. **Export your publications** to BibTeX format (.bib file)
+2. **Use Method 2, Option B** above with the BibTeX file
+3. The script automatically handles BibTeX formatting and converts it to HTML
+
+## Exporting BibTeX from ResearchGate
+
+ResearchGate allows you to export individual publications as BibTeX:
+
+1. Go to your publication on ResearchGate
+2. Click the "Cite" button
+3. Select "BibTeX" format
+4. Copy and paste into a `.bib` file
+5. Repeat for all publications you want to import
+6. Use Method 2, Option B above
+
+**Pro tip:** If you have many publications, it's faster to use a citation manager:
+1. Import your publications into Zotero, Mendeley, or EndNote
+2. Export all publications as a single BibTeX file
+3. Use the import script on that file
 
 ## Tips
 
-- **Sort by year**: Add newer publications at the top of the list
+- **Sort by year**: Publications are automatically sorted by year (newest first)
 - **Update year filter**: If you have publications from years not in the dropdown, add those years to the filter in `publications.html` (lines 32-38)
-- **Check data-year attribute**: This must match the actual year for filtering to work
+- **Check data-year attribute**: The script automatically sets this correctly for filtering to work
 - **ResearchGate links**: You can link directly to your ResearchGate publication pages if you don't have PDFs
+- **BibTeX cleaning**: The script automatically cleans up LaTeX commands and formatting from BibTeX
 
 ## Example ResearchGate Publication Format
 
