@@ -1,0 +1,487 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #003366;
+    --secondary-color: #0066cc;
+    --accent-color: #c5a900;
+    --text-color: #333;
+    --light-bg: #f5f5f5;
+    --white: #ffffff;
+    --border-color: #ddd;
+    --success-color: #4caf50;
+    --completed-color: #757575;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s;
+    padding: 0.5rem 1rem;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--accent-color);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Main Content */
+main {
+    padding: 3rem 0;
+    min-height: calc(100vh - 300px);
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Sections */
+.about {
+    margin-bottom: 3rem;
+}
+
+.about h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.about p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Highlight Grid */
+.highlights {
+    margin: 3rem 0;
+}
+
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.highlight-card {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.highlight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.highlight-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+}
+
+/* People Section */
+.people-section {
+    margin-bottom: 3rem;
+}
+
+.people-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.person-card {
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.person-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.person-role {
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.person-bio {
+    margin-bottom: 0.75rem;
+}
+
+.person-contact {
+    font-size: 0.9rem;
+}
+
+.person-contact a {
+    color: var(--secondary-color);
+}
+
+/* Alumni List */
+.alumni-list {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.alumni-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.alumni-item:last-child {
+    border-bottom: none;
+}
+
+.alumni-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+/* Publications */
+.filter-controls {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--light-bg);
+    border-radius: 5px;
+}
+
+.filter-controls label {
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.filter-controls select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.publications-list {
+    margin-top: 2rem;
+}
+
+.publication {
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.pub-title {
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+.pub-authors {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.pub-journal {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.pub-year {
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.pub-links {
+    margin-top: 0.75rem;
+}
+
+.pub-link {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    margin-right: 0.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.pub-link:hover {
+    background-color: var(--primary-color);
+}
+
+.no-results {
+    text-align: center;
+    padding: 2rem;
+    color: #999;
+}
+
+/* Projects */
+.projects-section {
+    margin-bottom: 3rem;
+}
+
+.projects-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.project-card {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    border-left: 5px solid var(--secondary-color);
+}
+
+.project-title {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.project-status {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.status-active {
+    background-color: var(--success-color);
+    color: var(--white);
+}
+
+.status-completed {
+    background-color: var(--completed-color);
+    color: var(--white);
+}
+
+.project-description {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.project-meta {
+    background-color: rgba(255,255,255,0.7);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.project-meta p {
+    margin-bottom: 0.5rem;
+}
+
+.project-outputs {
+    background-color: rgba(255,255,255,0.7);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.project-outputs ul {
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+}
+
+/* News */
+.news-feed {
+    margin-top: 2rem;
+}
+
+.news-item {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.news-date {
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.news-title {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.news-content {
+    line-height: 1.8;
+}
+
+.news-content a {
+    color: var(--secondary-color);
+}
+
+/* Info Box */
+.info-box {
+    background-color: #e3f2fd;
+    border-left: 4px solid var(--secondary-color);
+    padding: 1.5rem;
+    margin-top: 3rem;
+    border-radius: 5px;
+}
+
+.info-box h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.info-box code {
+    background-color: #f5f5f5;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .highlight-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .people-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+}
